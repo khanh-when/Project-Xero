@@ -1,9 +1,9 @@
 import csv
 from icecream import ic as print
 
-def ticker_data() -> dict[dict]:
+def stock_data() -> dict[dict]:
     stocks = {}
-    filename = "archive/symbols_valid_meta.csv"
+    filename = 'archive/symbols_valid_meta.csv'
 
     with open(filename, 'r') as csvfile:
         csv_reader = csv.reader(csvfile) # reader object
@@ -23,7 +23,7 @@ def ticker_data() -> dict[dict]:
     return stocks
 
 def main():
-    x = ticker_data()
+    x = stock_data()
     print(x['AMD'])
     print(x['AMD']['SecurityName'])
 
