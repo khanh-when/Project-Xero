@@ -2,7 +2,7 @@ import csv
 import glob
 from icecream import ic as print
 
-def stock_price_data(path: str) -> dict[dict]:
+def price_data(path: str) -> dict[dict]:
     '''Parse and Return data of Common Stocks / ETFs'''
     price_datas = {}
     file_path = path
@@ -22,11 +22,11 @@ def stock_price_data(path: str) -> dict[dict]:
 
                 try:
                     price_datas[ticker][date] = {
-                                            'Date': date,
-                                            'Open': round(float(line[1]), 2),
-                                            'High': round(float(line[2]), 2),
-                                            'low': round(float(line[3]), 2),
-                                            'AdjClose': round(float(line[5]), 2),
+                                            'TradeDate': date,
+                                            'OpenPrice': round(float(line[1]), 2),
+                                            'HighPrice': round(float(line[2]), 2),
+                                            'LowPrice': round(float(line[3]), 2),
+                                            'AdjClosePrice': round(float(line[5]), 2),
                                             'Volume': int(line[6]),       
                                         }
                 except ValueError:
@@ -35,10 +35,10 @@ def stock_price_data(path: str) -> dict[dict]:
     return price_datas
 
 def main():
-    stock_prices = stock_price_data('archive/stocks/*.csv')
+    stock_prices = price_data('archive/stocks/*.csv')
     print(stock_prices['AMD']['2020-04-01'])
 
-    etf_prices = stock_price_data('archive/etfs/*.csv')
+    etf_prices = price_data('archive/etfs/*.csv')
     print(etf_prices['AGND']['2020-04-01'])
 
 
