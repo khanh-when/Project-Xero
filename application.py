@@ -26,13 +26,19 @@ def insert_stock(conn, stock_id: str, security_name: str, listing_exchange: str,
     query = "INSERT INTO Stocks(Stock_ID, SecurityName, ListingExchange, MarketCategory, ETF) VALUES (?, ?, ?, ?, ?);"
 
     try:
-        with conn.cursor() as cur:
-            cur.execute(query, (stock_id, security_name, listing_exchange, marketing_category, is_etf))
+        with conn.cursor() as cursor:
+            cursor.execute(query, (stock_id, security_name, listing_exchange, marketing_category, is_etf))
         print(f"Stock: {stock_id} is successfully added to the Stock Table.")
 
     except mariadb.Error as e:
         print(f"Error: Insert - {e}")
         raise mariadb.Error
+
+# def select_data (conn, attriubute: str, table: str, )
+
+
+
+
 
 
 def main():
@@ -41,7 +47,9 @@ def main():
 
     # print(stocksData['AMD']['SecurityName'])
 
-    x = stocksData['AMD']
+    for item in stocksData.values():
+        print(item.values())
+
 
     # pricesData = price_data('archive/stocks/*.csv')
     # print(stocksData['AMD'])
