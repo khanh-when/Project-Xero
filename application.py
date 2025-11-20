@@ -1,7 +1,7 @@
 import mariadb
-from dataparsers.ticker_data_parser import stock_data
-from dataparsers.stock_etf_parser import price_data
-from dataparsers.reformat_data import reformat
+from data_parsers.stock_data_parser import stock_data
+from data_parsers.price_data_parser import price_data
+from data_parsers.reformat_data import reformat
 
 def connection(db_name):
     '''Establish Database Connection to MariaDB'''
@@ -14,7 +14,7 @@ def connection(db_name):
                 port = 3306,
                 database = db_name,
                 autocommit = True
-            )
+            ) 
     
     except mariadb.Error as e:
         print(f"Error: MariaDB Connection {e}")

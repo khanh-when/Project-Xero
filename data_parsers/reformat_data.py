@@ -1,4 +1,4 @@
-from .ticker_data_parser import stock_data
+from .stock_data_parser import stock_data
 
 def reformat(data, type):
     '''Return Newly Formatted Data'''
