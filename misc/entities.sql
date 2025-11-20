@@ -2,12 +2,15 @@
 -- Create Stock Entity Table
 -- @block
 CREATE TABLE Stocks(
-    StockID VARCHAR(5) PRIMARY KEY,
-    SecurityName VARCHAR(100),
+    StockID VARCHAR(6) PRIMARY KEY,
+    SecurityName VARCHAR(264),
     ListingExchange CHAR NULL,
     MarketCategory CHAR NULL,
     ETF BOOLEAN
 );
+
+-- @block
+DROP TABLE Stocks;
 
 
 -- Create Price_Data Entity Table

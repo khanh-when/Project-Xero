@@ -20,41 +20,41 @@ def connection(db_name):
         print(f"Error: MariaDB Connection {e}")
         raise mariadb.Error
 
-
-def insert_stock(conn, stock_id: str, security_name: str, listing_exchange: str, marketing_category: str, is_etf: bool):
+def insert_stocks(conn, data, type=1):
     '''Insert a New Stock into the Stocks Table'''
-    query = "INSERT INTO Stocks(Stock_ID, SecurityName, ListingExchange, MarketCategory, ETF) VALUES (?, ?, ?, ?, ?);"
+    query = "INSERT INTO Stocks VALUES (?, ?, ?, ?, ?)"
 
-    try:
-        with conn.cursor() as cursor:
-            cursor.execute(query, (stock_id, security_name, listing_exchange, marketing_category, is_etf))
-        print(f"Stock: {stock_id} is successfully added to the Stock Table.")
+    if type == 1:
 
-    except mariadb.Error as e:
-        print(f"Error: Insert - {e}")
-        raise mariadb.Error
+        try:
+            with conn.cursor() as cursor:
+                cursor.execute(query, (data[0], data[1], data[2], data[3], data[4]))
+            print(f"Stock: {data[0]} is successfully added to the Stock Table.")
 
+        except mariadb.Error as e:
+            print(f"Error: Insert - {e}")
+            raise mariadb.Error
+        
+    if type == 2:
+
+        try:
+                
+            with conn.cursor() as cursor:
+                cursor.executemany(query, data)
+                
+        except mariadb.Error as e:
+            print(f"Error: MariaDB Several Insertions {e}")
+            raise mariadb.Error
 
 
 def main():
 
     stocksData = stock_data()
-
     formatted = reformat(stocksData, type=1)
-
-    for i in range(10):
-        print(formatted[i])
-
-
-    # print(stocksData['AMD']['SecurityName'])
-    # pricesData = price_data('archive/stocks/*.csv')
-    # print(stocksData['AMD'])
-    # print(pricesData['AMD']['2020-04-01'])
 
     try:
         conn = connection('stock_market')
-
-        # insert_stock(conn, x['StockID'], x['SecurityName'], x['ListingExchange'], x['MarketCategory'], x['ETF'])
+        insert_stocks(conn, formatted, type=2)
 
     except Exception as e:
         print(f'Error: {e}')

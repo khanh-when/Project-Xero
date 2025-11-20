@@ -5,5 +5,5 @@ Database Preparation
 
 ## Part II: Parse/Store .CSV Data
 
-## Part III: Insert all Stock and Price Datas into DB tables.
+## Part III: Insert all Stock/Price Data into DB
 

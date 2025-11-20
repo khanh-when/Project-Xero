@@ -5,7 +5,6 @@ def reformat(data, type):
 
     # return list[tuple(str, str, str, str | None, bool)]
     if type == 1: 
-        
         return [tuple(stock_info.values()) for stock_info in data.values()]
     
     if type == 2:
